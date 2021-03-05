@@ -1,6 +1,5 @@
 import React from "react"
 import Signup from "./Signup"
-import { Container } from "react-bootstrap"
 import { AuthProvider } from "../contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Dashboard from "./Dashboard"
@@ -11,10 +10,12 @@ import UpdateProfile from "./UpdateProfile"
 import LandingPage from "./LandingPage"
 
 function App() {
+  document.body.style.backgroundColor = "#242424"
   return (
-    <Router>
+    < Router >
       <AuthProvider>
         <Switch>
+
           <Route exact path="/" component={LandingPage} />
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
@@ -23,7 +24,7 @@ function App() {
           <PrivateRoute path="/update-profile" component={UpdateProfile} />
         </Switch>
       </AuthProvider>
-    </Router>
+    </Router >
   )
 }
 

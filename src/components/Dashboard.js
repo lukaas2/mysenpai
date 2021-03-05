@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Card, Button, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import MenuBar from './MenuBar'
 
 export default function Dashboard() {
   const [error, setError] = useState("")
@@ -21,9 +22,10 @@ export default function Dashboard() {
 
   return (
     <>
+      {MenuBar()}
       <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
         <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Card>
+          <Card bg="dark" text="white">
             <Card.Body>
               <h2 className="text-center mb-4">Profile</h2>
               {error && <Alert variant="danger">{error}</Alert>}

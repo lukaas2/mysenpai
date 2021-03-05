@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link } from "react-router-dom"
+import MenuBar from './MenuBar'
 
 export default function ForgotPassword() {
   const emailRef = useRef()
@@ -18,9 +19,9 @@ export default function ForgotPassword() {
       setError("")
       setLoading(true)
       await resetPassword(emailRef.current.value)
-      setMessage("Check your inbox for further instructions")
+      setMessage("Überprüfe deine Emails")
     } catch {
-      setError("Failed to reset password")
+      setError("Passwort konnte nicht zurückgesetzt werden")
     }
 
     setLoading(false)
@@ -28,11 +29,12 @@ export default function ForgotPassword() {
 
   return (
     <>
+      {MenuBar()}
       <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
         <div className="w-100" style={{ maxWidth: "400px" }}>
           <Card>
             <Card.Body>
-              <h2 className="text-center mb-4">Password Reset</h2>
+              <h2 className="text-center mb-4">Passwort zurücksetzen</h2>
               {error && <Alert variant="danger">{error}</Alert>}
               {message && <Alert variant="success">{message}</Alert>}
               <Form onSubmit={handleSubmit}>
@@ -41,7 +43,7 @@ export default function ForgotPassword() {
                   <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
                 <Button disabled={loading} className="w-100" type="submit">
-                  Reset Password
+                  Passwort reset
             </Button>
               </Form>
               <div className="w-100 text-center mt-3">
@@ -50,7 +52,7 @@ export default function ForgotPassword() {
             </Card.Body>
           </Card>
           <div className="w-100 text-center mt-2">
-            Need an account? <Link to="/signup">Sign Up</Link>
+            Du hast noch keinen Account? <Link to="/signup">Registriere Dich!</Link>
           </div>
         </div>
       </Container>

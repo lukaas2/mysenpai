@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert, Container } from "react-bootstrap"
 import { useAuth } from "../contexts/AuthContext"
 import { Link, useHistory } from "react-router-dom"
+import MenuBar from './MenuBar'
 
 export default function Login() {
   const emailRef = useRef()
@@ -18,9 +19,9 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      history.push("/dashboard")
     } catch {
-      setError("Failed to log in")
+      setError("Login fehlgeschlagen")
     }
 
     setLoading(false)
@@ -28,9 +29,10 @@ export default function Login() {
 
   return (
     <>
+      {MenuBar()}
       <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
         <div className="w-100" style={{ maxWidth: "400px" }}>
-          <Card>
+          <Card bg="dark" text="white">
             <Card.Body>
               <h2 className="text-center mb-4">Log In</h2>
               {error && <Alert variant="danger">{error}</Alert>}
@@ -40,7 +42,7 @@ export default function Login() {
                   <Form.Control type="email" ref={emailRef} required />
                 </Form.Group>
                 <Form.Group id="password">
-                  <Form.Label>Password</Form.Label>
+                  <Form.Label>Passwort</Form.Label>
                   <Form.Control type="password" ref={passwordRef} required />
                 </Form.Group>
                 <Button disabled={loading} className="w-100" type="submit">
@@ -48,12 +50,12 @@ export default function Login() {
             </Button>
               </Form>
               <div className="w-100 text-center mt-3">
-                <Link to="/forgot-password">Forgot Password?</Link>
+                <Link to="/forgot-password">Passwort vergessen?</Link>
               </div>
             </Card.Body>
           </Card>
-          <div className="w-100 text-center mt-2">
-            Need an account? <Link to="/signup">Sign Up</Link>
+          <div className="w-100 text-center mt-2 text-white">
+            Du hast noch keinen Account? <Link to="/signup">Registriere Dich!</Link>
           </div>
         </div>
       </Container>
